@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<title>Forms</title>
+
+</html>
+
+<body>
+  <form method="POST" action="index.php" novalidate>
+    <div>
+      <label for="firstName">First Name:</label>
+      <input type="text" name="firstName" id="firstName">
+    </div>
+    <div>
+      Last Name:
+      <input type="text" name="lastName">
+    </div>
+    <div>
+      Age:
+      <input type="text" name="age">
+    </div>
+    <div>
+      Email:
+      <input type="email" name="email">
+    </div>
+    <div>
+      State:
+      <select name="state">
+        <option value="CA">California</option>
+        <option value="MA">Massachusetts</option>
+        <option value="NY">New York</option>
+        <option value="AZ">Arizona</option>
+        <option value="VA">Virginia</option>
+      </select>
+    </div>
+    <div>
+      Intuit Employee:
+      <input type="checkbox" name="intuitEmployee">
+    </div>
+    <div>
+      Method of Commute:
+      <br> Car:
+      <input type="radio" name="methodOfCommute" value="car">
+      <br> Carpool:
+      <input type="radio" name="methodOfCommute" value="carpool">
+      <br> Bus:
+      <input type="radio" name="methodOfCommute" value="bus">
+      <br> Train:
+      <input type="radio" name="methodOfCommute" value="train">
+    </div>
+
+    <div>
+      Fav Colors:
+      <select name="favColors" size="5" multiple>
+        <option value="green">Green</option>
+        <option value="white">White</option>
+        <option value="saffron">Saffron</option>
+        <option value="red">Red</option>
+        <option value="yellow">Yellow</option>
+      </select>
+    </div>
+
+    <div>
+      Contact:<br>
+      Home: <input type="radio" name="contact" value="home">
+      Work: <input type="radio" name="contact" value="work">
+
+      <input type="text" name="contactNumber">
+    </div>
+
+    <div>
+      Comments:
+      <textarea type="checkbox" row="5" cols="60" name="comments"></textarea>
+    </div>
+
+    <input type="submit" value="Submit">
+    <!--
+    <input type="button" value="Click Me">
+    <input type="reset" value="Reset">
+    <input type="image" value="This is an image">
+
+    <button type="button">Submit</button>
+  -->
+  </form>
+</body>
