@@ -1,0 +1,52 @@
+body {
+  padding: 10px;
+  margin: 10px;
+  border: 1px solid red; }
+
+p {
+  font-weight: bold; }
+
+div p {
+  font-weight: bold; }
+
+header {
+  color: deepskyblue; }
+
+footer {
+  color: deepskyblue; }
+
+/*div > header {
+  color: blue;
+}
+
+div > footer {
+  color: blue;
+}
+
+div > p {
+  font-family: sans-serif;
+}*/
+div > header {
+  color: deepskyblue; }
+div > footer {
+  color: deepskyblue; }
+div > p {
+  font-family: sans-serif; }
+div h1 {
+  color: seagreen; }
+div footer {
+  color: seagreen; }
+div[title] {
+  font-weight: bold; }
+
+.bold, div {
+  font-weight: bold; }
+
+span {
+  font-weight: bold;
+  font-family: cursive;
+  font-size: 32px;
+  font-style: italic; }
+
+div {
+  color: red; }
