@@ -1,0 +1,24 @@
+@mixin column-count($columnCount: 3) {
+  -webkit-column-count: $columnCount;
+  column-count: $columnCount;
+}
+
+@mixin column-rule($columnRule: 3) {
+  -webkit-column-rule: $columnRule;
+  column-rule: $columnRule;
+}
+
+@mixin column-gap($columnGap: 3) {
+  -webkit-column-gap: $columnGap;
+  column-gap: $columnGap;
+}
+
+@mixin column-width($columnWidth: 3) {
+  -webkit-column-width: $columnWidth;
+  column-width: $columnWidth;
+}
+
+@mixin column-span($columnSpan: all) {
+  -webkit-column-span: $columnSpan;
+  column-span: $columnSpan;
+}

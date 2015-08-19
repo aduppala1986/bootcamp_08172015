@@ -68,3 +68,86 @@ div {
   @extend .bold;
   color: red;
 }
+@import "libs/columns";
+.content {
+  @include column-count(3);
+  @include column-rule(2px);
+  @include column-gap(40px);
+  @include column-width(10px);
+  h2 {
+    @include column-span(all);
+    text-align: center;
+  }
+}
+body {
+  height: 0;
+  padding: 0;
+}
+.content1 {
+  display: flex;
+  flex-direction: column;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  position: absolute;
+  background: blue;
+  align-items: center;
+  justify-content: space-around;
+  div {
+
+    //flex-grow: 1;
+    //border: 1px solid black;
+    line-height: 100%;
+    vertical-align: middle;
+    height: 30px;
+    padding: 0;
+  }
+  button {
+    height: 50px;
+    vertical-align: middle;
+  }
+}
+.content2 {
+  display: flex;
+  flex-direction: row;
+  width: 400px;
+  height: 400px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 50px;
+  border: 1px solid red;
+  align-items: flex-start;
+  justify-content: flex-end;
+}
+div {
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  background-color: green;
+  color: black;
+  header {
+    flex-grow: 1;
+    background-color: white;
+    color: black;
+  }
+  footer {
+    flex-grow: 1;
+    background-color: #757575;
+  }
+  article {
+    flex-grow: 5;
+    display: flex;
+    flex-direction: row;
+  }
+  aside {
+    flex-grow: 8;
+  }
+  section {
+    flex-grow: 3;
+  }
+}

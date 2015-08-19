@@ -50,3 +50,79 @@ span {
 
 div {
   color: red; }
+
+.content {
+  -webkit-column-count: 3;
+  column-count: 3;
+  -webkit-column-rule: 2px;
+  column-rule: 2px;
+  -webkit-column-gap: 40px;
+  column-gap: 40px;
+  -webkit-column-width: 10px;
+  column-width: 10px; }
+  .content h2 {
+    -webkit-column-span: all;
+    column-span: all;
+    text-align: center; }
+
+body {
+  height: 0;
+  padding: 0; }
+
+.content1 {
+  display: flex;
+  flex-direction: column;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  position: absolute;
+  background: blue;
+  align-items: center;
+  justify-content: space-around; }
+  .content1 div {
+    line-height: 100%;
+    vertical-align: middle;
+    height: 30px;
+    padding: 0; }
+  .content1 button {
+    height: 50px;
+    vertical-align: middle; }
+
+.content2 {
+  display: flex;
+  flex-direction: row;
+  width: 400px;
+  height: 400px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 50px;
+  border: 1px solid red;
+  align-items: flex-start;
+  justify-content: flex-end; }
+
+div {
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  background-color: green;
+  color: black; }
+  div header {
+    flex-grow: 1;
+    background-color: white;
+    color: black; }
+  div footer {
+    flex-grow: 1;
+    background-color: #757575; }
+  div article {
+    flex-grow: 5;
+    display: flex;
+    flex-direction: row; }
+  div aside {
+    flex-grow: 8; }
+  div section {
+    flex-grow: 3; }
