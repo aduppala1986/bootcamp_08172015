@@ -1,0 +1,17 @@
+/*
+	Name: transform
+	Description: Applies a transform to an element in a cross browser manner.
+	Parameters:
+	  $transform
+		$transform-origin
+	Compatibility: Provides browser specific style for webkit.
+*/
+@mixin transform($transform:none, $transform-origin:"50% 50% 0") {
+	-ms-transform: #{$transform}; /* IE 9 */
+	-webkit-transform: #{$transform}; /* Chrome, Safari, Opera */
+	transform: #{$transform};
+
+	-ms-transform-origin: #{$transform-origin}; /* IE 9 */
+	-webkit-transform-origin: #{$transform-origin}; /* Chrome, Safari, Opera */
+	transform-origin: #{$transform-origin};
+}

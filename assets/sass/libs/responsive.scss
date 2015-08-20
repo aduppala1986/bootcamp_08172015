@@ -1,0 +1,24 @@
+$mobile-max-width: 767px;
+$tablet-max-width: 991px;
+
+
+@media screen and (max-width: $mobile-max-width) {
+	.tablet-visible { display:none; }
+	.desktop-visible { display:none; }
+
+	.mobile-hidden { display:none; }
+}
+
+@media screen and (min-width: $mobile-max-width + 1) and (max-width: $tablet-max-width) {
+	.mobile-visible { display:none; }
+	.desktop-visible { display:none; }
+
+	.tablet-hidden { display:none; }
+}
+
+@media screen and (min-width: $tablet-max-width + 1) {
+	.mobile-visible { display:none; }
+	.tablet-visible { display:none; }
+
+	.desktop-hidden { display:none; }
+}

@@ -1,0 +1,65 @@
+/*
+	Name: transition
+	Description: Applies a single/multiple transition to an element in a cross browser manner.
+	Parameters:
+	  $transition
+	Compatibility: Provides browser specific style for webkit.
+*/
+@mixin transition($transition) {
+	transition: #{$transition};
+	-webkit-transition: #{$transition};
+}
+
+/*
+	Name: transition-prop
+	Description: Applies a single transition to an element in a cross browser manner.
+	Parameters:
+	  $transition-property
+	  $transition-duration
+	  $transition-delay
+	  $transition-timing-function
+	Compatibility: Provides browser specific style for webkit.
+*/
+@mixin transition-prop(
+	$transition-property:all,
+	$transition-duration:0,
+	$transition-delay:0,
+	$transition-timing-function:ease) {
+
+	transition-property: $transition-property;
+	transition-duration: $transition-duration;
+	transition-delay: $transition-delay;
+	transition-timing-function: $transition-timing-function;
+
+	-webkit-transition-property: $transition-property;
+	-webkit-transition-duration: $transition-duration;
+	-webkit-transition-delay: $transition-delay;
+	-webkit-transition-timing-function: $transition-timing-function;
+}
+
+/*
+	Name: transition-props
+	Description: Applies a single/multiple transition to an element in a cross browser manner.
+	Parameters:
+	  $transition-property
+	  $transition-duration
+	  $transition-delay
+	  $transition-timing-function
+	Compatibility: Provides browser specific style for webkit.
+*/
+@mixin transition-props(
+	$transition-property:all,
+	$transition-duration:0,
+	$transition-delay:0,
+	$transition-timing-function:ease) {
+
+	transition-property: #{$transition-property};
+	transition-duration: #{$transition-duration};
+	transition-delay: #{$transition-delay};
+	transition-timing-function: #{$transition-timing-function};
+
+	-webkit-transition-property: #{$transition-property};
+	-webkit-transition-duration: #{$transition-duration};
+	-webkit-transition-delay: #{$transition-delay};
+	-webkit-transition-timing-function: #{$transition-timing-function};
+}

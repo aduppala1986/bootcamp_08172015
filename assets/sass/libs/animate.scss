@@ -1,0 +1,55 @@
+/*
+	Name: animate-setup
+	Description: Setups up the animation key frames for the named animation.
+	Parameters:
+	  $animation-name
+	  @content
+	Compatibility: Provides browser specific style for webkit.
+*/
+@mixin animate-setup($animation-name) {
+	@keyframes #{$animation-name} { @content; }
+	@-webkit-keyframes #{$animation-name} { @content; }
+}
+
+/*
+	Name: animate-me
+	Description: Assigns and configures the named animation to an element.
+	Parameters:
+	  $animation-name
+		$animation-duration
+		$animation-timing-function
+		$animation-delay
+		$animation-fill-mode
+		$animation-iteration-count
+		$animation-direction
+		$animation-play-state
+	Compatibility: Provides browser specific style for webkit.
+*/
+@mixin animate-me(
+	$animation-name:none,
+	$animation-duration:0,
+	$animation-timing-function:ease,
+	$animation-delay:0,
+	$animation-fill-mode:none,
+	$animation-iteration-count:1,
+	$animation-direction:normal,
+	$animation-play-state:running) {
+
+	animation-name: $animation-name;
+	animation-duration: $animation-duration;
+	animation-timing-function: $animation-timing-function;
+	animation-delay: $animation-delay;
+	animation-iteration-count: $animation-iteration-count;
+	animation-direction: $animation-direction;
+	animation-play-state: $animation-play-state;
+	animation-fill-mode: $animation-fill-mode;
+
+	-webkit-animation-name: $animation-name;
+	-webkit-animation-duration: $animation-duration;
+	-webkit-animation-timing-function: $animation-timing-function;
+	-webkit-animation-delay: $animation-delay;
+	-webkit-animation-iteration-count: $animation-iteration-count;
+	-webkit-animation-direction: $animation-direction;
+	-webkit-animation-play-state: $animation-play-state;
+	-webkit-animation-fill-mode: $animation-fill-mode;
+}

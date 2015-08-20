@@ -1,25 +1,8 @@
-.common-col, body .container .row .col-1, body .container .row .col-2, body .container .row .col-3, body .container .row .col-4, body .container .row .col-5, body .container .row .col-6 {
-  float: left;
-  box-sizing: border-box;
-  border: 1px solid green; }
-
-body {
-  margin: 0;
-  padding: 0; }
-  body .container {
-    width: 100%; }
-    body .container .row {
-      width: 100%;
-      clear: both; }
-      body .container .row .col-1 {
-        width: 16.66%; }
-      body .container .row .col-2 {
-        width: 33.33%; }
-      body .container .row .col-3 {
-        width: 50%; }
-      body .container .row .col-4 {
-        width: 66.66%; }
-      body .container .row .col-5 {
-        width: 83.33%; }
-      body .container .row .col-6 {
-        width: 100%; }
+.test {
+  margin: 10px;
+  padding: 5px;
+  border: 1px solid red;
+  background: blue;
+  color: white;
+  width: 200px;
+  box-sizing: border-box; }

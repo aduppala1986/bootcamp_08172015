@@ -1,40 +1,10 @@
-.common-col {
-  float: left;
+//SCSS File for day3_4.html. Activate this by renaming this as site.scss
+.test {
+  margin: 10px;
+  padding:5px;
+  border: 1px solid red;
+  background: blue;
+  color: white;
+  width: 200px;
   box-sizing: border-box;
-  border: 1px solid green;
-}
-body {
-  margin: 0;
-  padding: 0;
-  .container {
-    width: 100%;
-    .row {
-      width: 100%;
-      clear: both;
-      .col-1 {
-        @extend .common-col;
-        width: 16.66%;
-      }
-      .col-2 {
-        @extend .common-col;
-        width: 33.33%;
-      }
-      .col-3 {
-        @extend .common-col;
-        width: 50%;
-      }
-      .col-4 {
-        @extend .common-col;
-        width: 66.66%;
-      }
-      .col-5 {
-        @extend .common-col;
-        width: 83.33%;
-      }
-      .col-6 {
-        @extend .common-col;
-        width: 100%;
-      }
-    }
-  }
 }
