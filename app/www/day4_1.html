@@ -1,0 +1,78 @@
+<html>
+
+<head>
+  <title>Intuit Bootcamp</title>
+  <link href="css/site.min.gz.css" rel="stylesheet">
+</head>
+
+<body>
+  <script>
+    console.log(0 === 0);
+    console.log(-100 === -100);
+    console.log(Infinity === Infinity);
+    console.log(NaN === NaN);
+    console.log(parseInt("aaaa")); //use isNaN() if you want to compare NaN to NaN
+    console.log(typeof NaN);
+    console.log(0.1 + 0.2);
+
+    //falsy values are below, everything else is truthy
+    //null
+    //undefined
+    //0
+    //""
+    //false
+    //NaN
+
+    console.log("a" || "b"); //JS returns value
+
+    function f(p) {
+      var x = p || "default value";
+      console.log(x);
+    }
+
+    f();
+    f(0); //when we pass falsy value be careful
+    f(2);
+
+    //Arrays -> Objects can have both numeric and string properties
+    var r = [1, 2, 3];
+    console.dir(r);
+    r[1000] = 4;
+    r.someProp = "Hello";
+    console.dir(r);
+    r.push(6);
+    console.dir(r);
+
+    var o = {};
+    o[4] = "Hi";
+    console.dir(o);
+
+    //function
+    function myFunc(p1, p2, p3) {
+      console.log("called");
+      console.dir(arguments); //arguments is a property which is not an array
+      //return true;
+    }
+
+    myFunc(1, 2, 3, 4); // if no return value then output of function call is undefined
+    //console.log(myFunc());
+
+    var a; //JS has function scope but not block scope
+    console.log(a);
+    console.log(window.a);
+
+    function outerFunc() {
+      var x = 2;
+      return function innerFunc() {
+        console.log(x);
+      }
+      innerFunc();
+    }
+
+    var fn = outerFunc();
+    fn();
+
+  </script>
+</body>
+
+</html>

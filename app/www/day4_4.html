@@ -1,0 +1,66 @@
+<html>
+
+<head>
+  <title>Intuit Bootcamp</title>
+  <link href="css/site.min.gz.css" rel="stylesheet">
+</head>
+
+<body>
+  <script>
+    "use strict";
+    var a = {
+      name: "Bob"
+    }
+    var b = Object.create(a);
+    console.log(b);
+    b.name = "Scott";
+    console.log(b);
+    delete b.name;
+    console.log(b);
+    a.name = "Bill";
+    console.log(a);
+
+    function Person(firstName, lastName) {
+      this.firstName = firstName; // this object inherits from Person.prototype
+      this.lastName = lastName;
+    }
+
+    Person.prototype.getFullName = function() {
+      return this.firstName + " " + this.lastName;
+    }
+
+    var p1 = new Person("Justin", "Hung");
+    console.log(p1.getFullName());
+    console.dir(p1);
+
+    var p2 = new Person("Tim", "Kang");
+    console.dir(p2);
+
+    console.log(Object.getPrototypeOf(p1) === Object.getPrototypeOf(p2));
+    console.log(Object.getPrototypeOf(p1) === Person.prototype);
+
+    function IntuitEmployee(firstName, lastName, empId) {
+      if (this == null) {
+        throw Error("BANG");
+      }
+      this.empId = empId;
+      IntuitEmployee.prototype._super.call(this, firstName, lastName);
+    }
+
+    IntuitEmployee.prototype = Object.create(Person.prototype);
+    IntuitEmployee.prototype.constructor = IntuitEmployee;
+    IntuitEmployee.prototype._super = Person;
+
+    IntuitEmployee.prototype.getEmpInfo = function() {
+      return this.empId + " " + this.lastName + ", " + this.firstName;
+    }
+
+    var intuitEmp = new IntuitEmployee("Justin", "Hung", "1");
+    console.dir(intuitEmp);
+    console.dir(intuitEmp.getEmpInfo());
+    console.dir(intuitEmp.getFullName());
+  </script>
+  Hello!
+</body>
+
+</html>

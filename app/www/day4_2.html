@@ -1,0 +1,28 @@
+<html>
+
+<head>
+  <title>Intuit Bootcamp</title>
+  <link href="css/site.min.gz.css" rel="stylesheet">
+</head>
+
+<body>
+  <script>
+    var x = 0,
+      y = 0,
+      funcs = [];
+    for (; x < 5; x++) { //immediately invoked function expression
+      (function() {
+        var z = x;
+        funcs.push(function() {
+          console.log(z);
+        });
+      })(); //here is where we immediately invoke it and above this is the expression and the expression is not hoisted
+    }
+
+    for (; y < 5; y++) {
+      funcs[y]();
+    }
+  </script>
+</body>
+
+</html>

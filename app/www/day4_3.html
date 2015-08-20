@@ -1,0 +1,57 @@
+<html>
+
+<head>
+  <title>Intuit Bootcamp</title>
+  <link href="css/site.min.gz.css" rel="stylesheet">
+</head>
+
+<body>
+  <script>
+    "use strict";
+
+    function myFunc(p1, p2, p3) {
+      console.log(this, p1, p2, p3);
+      console.log(myFunc.myName);
+    }
+
+    myFunc.myName = "Aradhana";
+    myFunc(); // will return global object if use strict is off
+    window.myFunc();
+    console.dir(myFunc);
+
+    var o = {
+      id: 1,
+      myFunc: myFunc
+    };
+    o.myFunc();
+
+    console.log(myFunc === window.myFunc);
+    console.log(o.myFunc === window.myFunc);
+    console.log(myFunc === o.myFunc);
+
+    myFunc.call({id: 2}, "a", "b", "c"); // the first arg is the object and will be set up as "this"
+    myFunc.apply({id: 3}, ["a", "b", "c"]); // when I do not know the number of arguments at design time and are determined at runtime
+
+    var f = myFunc.bind({id: 4}, 6); // you permanentaly bind it
+    f(1,2,3);
+
+    function outer() {
+
+      var that = this;
+
+      function inner() {
+        console.log(that);
+        //these will not be passed via the closures
+        //this
+        //arguments
+      }
+
+      inner();
+    }
+
+    outer.call({id: 3});
+
+  </script>
+</body>
+
+</html>
