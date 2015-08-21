@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <title>Intuit Bootcamp</title>
+  </head>
+  <body>
+    <script>
+
+    "use strict";
+
+    var o = {};
+
+    o.name = "Eric";
+
+    o._firstName = "Erik";
+
+    Object.defineProperty(o, "firstName", {
+      enumerable: false,
+      configurable: false,
+      set: function(value){
+        console.log("set: " + value);
+        this._firstName = value;
+      },
+      get: function(){
+        console.log("get: " + this._firstName);
+        return this._firstName;
+      }
+    });
+
+    // Object.defineProperty(o, "firstName", {
+    //  enumerable: true,
+    //  configurable: true,
+    //  value: "Erik",
+    //  writable: true
+    // });
+
+    // o.firstName = "Bob";
+
+    for (var prop in o) {
+      console.log(prop);
+    }
+
+    console.dir(o);
+
+    </script>
+  </body>
+</html>
