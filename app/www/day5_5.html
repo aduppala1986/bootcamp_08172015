@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <title>Intuit Bootcamp</title>
+  </head>
+  <body>
+    <script>
+    window.Intuit = (function() {
+      function inherits(parent, child) {
+        child.prototype = Object.create(parent.prototype);
+        child.prototype.constructor = child;
+        child.prototype._super = parent;
+      }
+      var intuit = {};
+      function internalExtend(superEntity, options) {
+        var defaults = null, initialize = null;
+        if (options) {
+          if (options.defaults) {
+            defaults = options.defaults;
+            delete options.defaults;
+          }
+          if (options.initialize) {
+            console.log("set initialize");
+            initialize = options.initialize;
+            delete options.initialize;
+          }
+        }
+        function Entity(options) {
+          if (defaults && !options) {
+            options = {};
+            for (var prop in defaults) {
+              if (!options.hasOwnProperty(prop)) {
+                options[prop] = defaults[prop];
+              }
+            }
+          }
+          Entity.prototype._super.call(this, options);
+          if (initialize) {
+            console.log("run initialize");
+            initialize.call(this);
+          }
+        }
+        inherits(superEntity, Entity);
+        for (var prop in options) {
+          Entity.prototype[prop] = options[prop];
+        }
+        Entity.extend = function(options) {
+          return internalExtend(Entity, options)
+        };
+        return Entity;
+      };
+
+      function Model(options) {
+          this.attributes = options || {};
+      }
+
+      inherits(Events, Model);
+
+      Model.prototype.get = function(propName) {
+        return this.attributes[propName];
+      };
+      Model.prototype.set = function(propName, propValue) {
+        var eventData = {};
+        eventData[propName] = {
+          oldValue: this.attributes[propName],
+          newValue: propValue
+        };
+        this.attributes[propName] = propValue;
+        this.trigger("change", eventData);
+      };
+      Model.extend = function(options) {
+        return internalExtend(Model, options);
+      };
+      intuit.Model = Model;
+      function Collection(options) {
+        //console.dir(options);
+        this.models = options || [];
+        console.log("collection constructor fn");
+        console.dir(this.models);
+      }
+
+      inherits(Events, Collection);
+
+      Collection.prototype.add = function(model) {
+        console.log("collection add");
+        console.dir(this.models);
+        this.models.push(model);
+      };
+      Collection.prototype.forEach = function(fn) {
+        this.models.forEach(fn);
+      };
+      Collection.extend = function(options) {
+        return internalExtend(Collection, options);
+      };
+      intuit.Collection = Collection;
+
+      function Events() {
+
+      }
+
+      Events.prototype.trigger = function(eventName, eventData){
+
+        if(this.events && this.events[eventName]) {
+          this.events[eventName].forEach(function(eventHandler){
+            eventHandler(eventData);
+          });
+        }
+
+      };
+
+      Events.prototype.on = function(eventName, eventHandler){
+
+        if(!this.events) {
+          this.events = {};
+        }
+
+        if(!this.events[eventName]) {
+          this.events[eventName] = [];
+        }
+
+        this.events[eventName].push(eventHandler);
+      };
+
+      return intuit;
+
+    })();
+    var Account = Intuit.Model.extend({
+    initialize: function(){
+      var Transactions = Intuit.Collection.extend();
+      this.set("transactions", new Transactions());
+      //console.dir(this.get("transactions"));
+    },
+    getFullName: function () {
+      return this.get("firstName") + " " + this.get("lastName");
+    },
+
+    getBalance: function () {
+      return this.get("balance");
+    },
+
+    getAccNO: function () {
+      return this.get("accNo");
+    },
+
+    listTransaction: function () {
+      return this.get("transactions");
+    },
+
+    addTransaction: function (transaction) {
+      // this.get("transactions").push(transaction);
+      //var xxxxx= this.get("transactions");
+      //console.log("add transaction");
+      //console.dir(this.get("transactions"));
+      this.get("transactions").add(transaction);
+      this.set("balance", parseInt(this.get("balance")) + transaction );
+    }
+
+  });
+
+  var CheckingAccount = Account.extend ({
+
+
+  });
+
+  var SavingAccount = Account.extend ({
+    defaults: {
+      limit: 0
+    },
+
+    addTransaction: function(transaction) {
+      if (transaction < 0) {
+        if ( this.get("limit") > 5 ) {
+          console.error("Exceed Limit Withdrawl");
+          // this.trigger("over limit", );
+          return;
+        }
+        else {
+          console.log( this.get("limit"));
+          this.set("limit", this.get("limit") + 1 );
+        }
+      }
+
+      this._super.prototype.addTransaction.call(this, transaction);
+
+    }
+
+  });
+
+  var xx = new CheckingAccount({
+    accNo:"123",
+    balance: 100,
+    firstName: "John",
+    lastName: "Doe"
+  });
+
+  var xxx = new SavingAccount({
+    accNo:"333",
+    balance: 11,
+    firstName: "Doe",
+    lastName: "John"
+  });
+
+  xxx.addTransaction({});
+
+    </script>
+  </body>
+</html>
