@@ -7,7 +7,116 @@
 
 <body>
   <script>
-    "use strict";
+  "use strict";
+    window.Intuit = (function() {
+      function Events() {
+      }
+      Events.prototype.trigger = function(eventName, data) {
+        if (!this.handlers) {
+          this.handlers = [];
+        }
+        if (this.handlers[eventName]) {
+          this.handlers[eventName].forEach(function(handler) {
+            handler(data);
+          });
+        }
+      };
+      Events.prototype.on = function(eventName, handler) {
+        if (!this.handlers) {
+          this.handlers = [];
+        }
+        if (!this.handlers[eventName]) {
+          this.handlers[eventName] = [];
+        }
+        this.handlers[eventName].push(handler);
+      };
+      function inherits(parentModel, childModel) {
+        childModel.prototype = Object.create(parentModel.prototype);
+        childModel.prototype.constructor = childModel;
+        childModel.prototype._super = parentModel;
+      }
+      function mixin(targetObj, sourceObj) {
+        for(var prop in sourceObj) {
+          if (!targetObj[prop]) {
+            targetObj[prop] = sourceObj[prop];
+          }
+        }
+      }
+      function extend(options) {
+        var defaults;
+        if (options && options.defaults) {
+          defaults = options.defaults;
+          delete options.defaults;
+        }
+        var childModel = function(options) {
+          mixin(options, defaults);
+          this.attributes = options;
+        };
+        inherits(this, childModel);
+        if (options) {
+          for (var prop in options) {
+            childModel.prototype[prop] = options[prop];
+          }
+        }
+        childModel.extend = extend;
+        return childModel;
+      }
+      function Model() {
+      }
+      inherits(Events, Model)
+      Model.prototype.get = function(propName) {
+        return this.attributes[propName];
+      };
+      Model.prototype.set = function(propName, propValue) {
+        var o = {};
+        o[propName] = {
+          oldValue: this.attributes[propName],
+          newValue: propValue
+        };
+        this.trigger("change", o);
+        this.attributes[propName] = propValue;
+      };
+      return {
+        Model: extend.call(Model)
+      };
+    })();
+    var m = new Intuit.Model({
+      firstName: "Bob",
+      lastName: "Smith"
+    });
+    //console.dir(m);
+    var Person = Intuit.Model.extend({
+      defaults: {
+        firstName: "John",
+        lastName: "Doe",
+        age: 32,
+        hairColor: "brown",
+        eyeColor: "brown"
+      },
+      getFullName: function() {
+        return this.get("firstName") + " " + this.get("lastName");
+      }
+    });
+    var p = new Person({
+      lastName: "Tung"
+    });
+    p.on("change", function(data) {
+      console.dir(data);
+    });
+    p.set("age", 45);
+    console.log(p.getFullName());
+    console.dir(p);
+    var IntuitEmployee = Person.extend({
+      getEmpInfo: function() {
+        return this.get("empId") + " " + this.get("lastName") + ", " + this.get("firstName");
+      }
+    });
+    var e = new IntuitEmployee({
+      empId: 1,
+      firstName: "Justin",
+      lastName: "Hung"
+    });
+
 
 
   </script>
