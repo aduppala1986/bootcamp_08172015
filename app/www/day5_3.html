@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+
+<html>
+
+	<head>
+		<title>Intuit Bootcamp</title>
+		<link rel="shortcut icon" href="data:image/x-icon;," type="image/x-icon">
+	</head>
+
+	<body>
+
+		<script>
+			window.Intuit = (function() {
+				function inherits(parent, child) {
+					child.prototype = Object.create(parent.prototype);
+					child.prototype.constructor = child;
+					child.prototype._super = parent;
+				}
+				var intuit = {};
+				function internalExtend(superEntity, options) {
+					var defaults = {}, initialize = null;
+					if (options) {
+						if (options.defaults) {
+							defaults = options.defaults;
+							delete options.defaults;
+						}
+						if (options.initialize) {
+							console.log("set initialize");
+							initialize = options.initialize;
+							delete options.initialize;
+						}
+					}
+					function Entity(options) {
+						if (!options) {
+							options = {};
+						}
+						for (var prop in defaults) {
+							if (!options.hasOwnProperty(prop)) {
+								options[prop] = defaults[prop];
+							}
+						}
+						Entity.prototype._super.call(this, options);
+						if (initialize) {
+							console.log("run initialize");
+							initialize.call(this);
+						}
+					}
+					inherits(superEntity, Entity);
+					for (var prop in options) {
+						Entity.prototype[prop] = options[prop];
+					}
+					Entity.extend = function(options) {
+						return internalExtend(Entity, options)
+					};
+					return Entity;
+				};
+				function Model(options) {
+						this.attributes = options || {};
+				}
+				Model.prototype.get = function(propName) {
+					return this.attributes[propName];
+				};
+				Model.prototype.set = function(propName, propValue) {
+					this.attributes[propName] = propValue;
+				};
+				Model.extend = function(options) {
+					return internalExtend(Model, options);
+				};
+				intuit.Model = Model;
+				function Collection(options) {
+					this.models = options || [];
+				}
+				Collection.prototype.add = function(model) {
+					this.models.push(model);
+				};
+				Collection.prototype.forEach = function(fn) {
+					this.models.forEach(fn);
+				};
+				Collection.extend = function(options) {
+					return internalExtend(Collection, options);
+				};
+				intuit.Collection = Collection;
+				return intuit;
+			})();
+			var Person = Intuit.Model.extend({
+				initialize: function() {
+					this.set("addresses", []);
+				},
+				addAddress: function(street, city, state, zipCode) {
+					this.get("addresses").push({
+						street: street,
+						city: city,
+						state: state,
+						zipCode: zipCode
+					});
+				},
+				getFullName: function() {
+					return this.get("firstName") + " " + this.get("lastName");
+				}
+			});
+			var IntuitEmployee = Person.extend({
+				defaults: {
+					firstName: "John",
+					lastName: "Doe",
+					age: 32,
+					empId: 234,
+				},
+				getEmpInfo: function() {
+					return this.get("empId") + " " + this.get("lastName") + ", " + this.get("firstName");
+				}
+			})
+			var e = new IntuitEmployee({
+				firstName:"Barack",
+				lastName: "Obama",
+				age: 54,
+				empId: 1
+			});
+			e.addAddress("1600 Pennsylvania Ave.", "Washington", "DC", "10000");
+			var e2 = new IntuitEmployee({
+				firstName: "Sarah",
+				lastName: "Greene",
+				age: 12,
+				empId: 2
+			});
+			e2.addAddress("123 Oak Lane", "Martha's Vineyard", "MA", "20000");
+			console.dir(e2);
+			var IntuitEmployees = Intuit.Collection.extend({
+				showMailingList: function() {
+					this.models.forEach(function(emp) {
+						var address = emp.get("addresses")[0];
+						console.log(emp.get("firstName") + " " + emp.get("lastName") + " " +
+							address.street + " " + address.city + " " + address.state + ", " + address.zipCode);
+					})
+				}
+			});
+			var iEmps = new IntuitEmployees([e, e2]);
+			iEmps.showMailingList();
+			//iEmps.forEach(function(emp) {
+			//	console.log(emp.getEmpInfo());
+			//})
+		</script>
+
+	</body>
+</html>

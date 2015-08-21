@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+
+<html>
+
+	<head>
+		<title>Intuit Bootcamp</title>
+		<link rel="shortcut icon" href="data:image/x-icon;," type="image/x-icon">
+	</head>
+
+	<body>
+
+		<script>
+			window.Intuit = (function() {
+				function inherits(parent, child) {
+					child.prototype = Object.create(parent.prototype);
+					child.prototype.constructor = child;
+					child.prototype._super = parent;
+				}
+				var intuit = {};
+				function internalExtend(superEntity, options) {
+					var defaults = {};
+					if (options && options.defaults) {
+						defaults = options.defaults;
+					}
+					function Entity(options) {
+						if (!options) {
+							options = {};
+						}
+						for (var prop in defaults) {
+							if (!options.hasOwnProperty(prop)) {
+								options[prop] = defaults[prop];
+							}
+						}
+						Entity.prototype._super.call(this, options);
+					}
+					inherits(superEntity, Entity);
+					for (var prop in options) {
+						Entity.prototype[prop] = options[prop];
+					}
+					Entity.extend = function(options) {
+						return internalExtend(Entity, options)
+					};
+					return Entity;
+				};
+				function Model(options) {
+						this.attributes = options || {};
+				}
+				Model.prototype.get = function(propName) {
+					return this.attributes[propName];
+				};
+				Model.prototype.set = function(propName, propValue) {
+					this.attributes[propName] = propValue;
+				};
+				Model.extend = function(options) {
+					return internalExtend(Model, options);
+				};
+				intuit.Model = Model;
+				return intuit;
+			})();
+			var Person = Intuit.Model.extend({
+				getFullName: function() {
+					return this.get("firstName") + " " + this.get("lastName");
+				}
+			});
+			var IntuitEmployee = Person.extend({
+				defaults: {
+					firstName: "John",
+					lastName: "Doe",
+					age: 32,
+					empId: 234
+				},
+				getEmpInfo: function() {
+					return this.get("empId") + " " + this.get("lastName") + ", " + this.get("firstName");
+				}
+			})
+			var e = new IntuitEmployee({
+				empId: 456
+			});
+			console.log(e.getEmpInfo());
+			console.dir(e);
+		</script>
+
+	</body>
+</html>
