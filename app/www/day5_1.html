@@ -1,0 +1,115 @@
+<html>
+
+<head>
+  <title>Intuit Bootcamp</title>
+  <link href="css/site.min.gz.css" rel="stylesheet">
+</head>
+
+<body>
+  <script>
+    "use strict";
+
+    window.Intuit = (function() { //executed on page load as its IIFE
+      function inherits(parent, child) {
+        child.prototype = Object.create(parent.prototype);
+        child.prototype.constructor = child;
+        child.prototype._super = parent;
+      }
+
+      var intuit = {};
+
+      function internalExtend(superEntity, options) {
+        var defaults;
+        if (options && options.defaults) {
+          defaults = options.defaults;
+        }
+
+        function Entity(options) {
+          if(!options) {
+            options = {};
+          }
+          for (var prop in defaults) {
+            if (!options.hasOwnProperty(prop)) {
+              options[prop] = defaults[prop];
+            }
+          }
+          Entity.prototype._super.call(this, options);
+        }
+
+        inherits(superEntity, Entity);
+        for (var prop in options) {
+          Entity.prototype[prop] = options[prop];
+        }
+
+        Entity.extend = function(options) { //for continous extension
+          return internalExtend(Entity, options)
+        };
+        return Entity;
+      };
+
+      function Model(options) {
+        this.attributes = options || {};
+      }
+
+      Model.prototype.get = function(propName) {
+        return this.attributes[propName];
+      };
+
+      Model.prototype.set = function(propName, propValue) {
+        this.attributes[propName] = propValue;
+      };
+
+      Model.extend = function(options) {
+        return internalExtend(Model, options)
+      };
+
+      intuit.Model = Model;
+      return intuit;
+
+    })();
+
+    var Person = Intuit.Model.extend({ //refers window.Intuit, Intuit.Model is a function object, Intuit.Model.extend is a property
+      getFullName: function() {
+        return this.get("firstName") + " " + this.get("lastName");
+      }
+    });
+
+    var p = new Person({
+      firstName: "Bob",
+      lastName: "Smith"
+    });
+
+    var IntuitEmployee = Person.extend({
+      defaults: {
+        firstName: "John",
+        lastName: "Doe",
+        empId: 1,
+        age: 32
+      },
+      getEmpInfo: function() {
+        return this.get("empId") + " " + this.get("lastName") + ", " + this.get("firstName");
+      }
+    })
+
+    var e = new IntuitEmployee({
+      firstName: "Bob",
+      lastName: "Smith",
+      empId: 123
+    });
+
+    console.dir(e);
+
+    var e1 = new IntuitEmployee();
+    e1.getEmpInfo();
+    console.dir(e1);
+
+    var e2 = new IntuitEmployee({
+      age: 20
+    });
+    e2.getEmpInfo();
+    console.dir(e2);
+
+  </script>
+</body>
+
+</html>
