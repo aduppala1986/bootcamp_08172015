@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+  <title>Intuit Bootcamp</title>
+</head>
+
+<body>
+  <!--
+  <div id="newsFlash">
+    News Flash: If you own stocks, you are not quite broke.
+  </div>
+-->
+  <div id="placeHolder">
+    <div id="divider"></div>
+  </div>
+
+  <ul>
+    <li>Item 1</li>
+    <li>Item 2</li>
+    <li>Item 3</li>
+    <li>Item 4</li>
+    <li>Item 5</li>
+  </ul>
+
+  <script src="libs/jquery/dist/jquery.js"></script>
+  <script src="js/dojo/dojo-config.js"></script>
+  <script src="libs/dojo/dojo.js"></script>
+
+  <script>
+    var domElement = document.createElement("div"); //detached dom element
+    domElement.innerHTML = "Motel 6 & Hobee's Rocks!";
+    //document.getElementById("placeHolder").appendChild(domElement); //dom construct methodologies
+    //document.getElementById("placeHolder").insertBefore(domElement, document.getElementById("divider"));
+    //document.getElementById("placeHolder").replaceChild(domElement, document.getElementById("divider"));
+
+    /*var liNodes = document.querySelectorAll("li");
+    for (var x=0; x<liNodes.length; x++) {
+      liNodes[x].appendChild(domElement);
+    }*/
+
+    var domElement2 = $("<div>"); //jQuery
+    domElement2.html("Motel 6 & Hobee's Rocks!!!");
+    //$("#placeHolder").append(domElement2);
+    //$("#divider").replaceWith(domElement2);
+    //$("#divider").unwrap(domElement2).wrap("<section></section>"); //unwrap takes away parent
+    //$("#divider").after(domElement2);
+    //$("#divider").before(domElement2);
+    $("li").append(domElement2); //it takes care of cloning process to append it multiple times
+
+
+
+    // require(["dojo/dom", "dojo/dom-construct", "dojo/query", "dojo/domReady!"],
+    //   function(dom, domConstruct, query) { //Dojo
+    //
+    //     /*var domElement3 = domConstruct.create("div", {
+    //       innerHTML: "Motel 6 & Hobee's Rocks!!!!!"
+    //     }, dom.byId("placeHolder"));*/
+    //
+    //     var domElement3 = domConstruct.create("div", {
+    //       innerHTML: "Motel 6 & Hobee's Rocks!!!!!"
+    //     });
+    //
+    //     domConstruct.place(domElement3, dom.byId("placeHolder"), "before");
+    //     //domConstruct.place(domElement3, dom.byId("placeHolder"), "after");
+    //     //domConstruct.place(domElement3, dom.byId("placeHolder"), "first");
+    //     //domConstruct.place(domElement3, dom.byId("placeHolder"), "only");
+    //
+    //   });
+
+  </script>
+</body>
+
+</html>

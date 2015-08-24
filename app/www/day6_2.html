@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+  <title>Intuit Bootcamp</title>
+</head>
+
+<body>
+  <!--
+  <div id="newsFlash">
+    News Flash: If you own stocks, you are not quite broke.
+  </div>
+-->
+
+  <div id="newsFlash" class='news-story'>
+    News Flash: If you own stocks, you are not quite broke.
+  </div>
+
+  <script src="libs/jquery/dist/jquery.js"></script>
+  <script src="js/dojo/dojo-config.js"></script>
+  <script src="libs/dojo/dojo.js"></script>
+
+  <script>
+
+    var domElement = document.createElement("div"); //detached dom element
+    domElement.innerHTML = "<div>Here is some content<br>Hi Class!</div>";
+    console.dir(domElement);
+
+    var domElement2 = $("<div>"); //jQuery
+    console.dir(domElement2);
+
+    var domElement2b = $("<div>Here is some content<br>Hi Class!</div>"); //jQuery
+    console.dir(domElement2b);
+
+    /*$(function () {
+      console.log("Dom Content Loaded");
+    });*/
+
+    require(["dojo/dom", "dojo/dom-construct", "dojo/query", "dojo/domReady!"],
+      function(dom, domConstruct, query) { //Dojo
+        var divElement3 = domConstruct.create("div", {
+          innerHTML: "Random Text!"
+        });
+        console.dir(divElement3);
+
+        var domElement3b = domConstruct.toDom("<div>Here is some content<br>Hi Class!</div>"); //jQuery
+        console.dir(domElement3b);
+
+      });
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+  <title>Intuit Bootcamp</title>
+</head>
+
+<body>
+
+  <table>
+    <tr>
+      <td>Name</td>
+      <td>Desc</td>
+      <td>Date</td>
+      <td>
+        <button id="myButton">Click Me</button>
+      </td>
+    </tr>
+  </table>
+
+
+  <script src="libs/jquery/dist/jquery.js"></script>
+  <script src="js/dojo/dojo-config.js"></script>
+  <script src="libs/dojo/dojo.js"></script>
+
+  <script>
+    function myFunc1() {
+      console.log("I was clicked!");
+    }
+
+    function myFunc2() {
+      console.log("I was clicked!!");
+    }
+
+    function myFunc3() {
+      console.log("I was clicked!!!");
+    }
+
+    // var myButton = document.getElementById("myButton"); //DOM style
+    // myButton.addEventListener("click", myFunc1);
+    // myButton.addEventListener("click", myFunc2);
+    // myButton.addEventListener("click", myFunc3);
+    // //myButton.removeEventListener("click", myFunc1);
+    //
+    // $("#myButton").on("click", myFunc1);
+    // $("#myButton").on("click", myFunc2);
+    // $("#myButton").on("click", myFunc3);
+    // //$("#myButton").off("click", myFunc3);
+
+    require(["dojo/dom", "dojo/dom-construct", "dojo/query", "dojo/on", "dojo/domReady!"],
+      function(dom, domConstruct, query, on) {
+        var buttonEvent = on(dom.byId("myButton"), "click", myFunc1);
+        //buttonEvent.remove();
+        //console.dir($("#myButton").closest("tr"));
+      });
+  </script>
+</body>
+
+</html>
