@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+  <title>Intuit Bootcamp</title>
+</head>
+
+<body>
+  <!--
+  <div id="newsFlash">
+    News Flash: If you own stocks, you are not quite broke.
+  </div>
+-->
+
+  <div id="newsFlash" class='news-story'>
+    News Flash: If you own stocks, you are not quite broke.
+  </div>
+
+  <script src="libs/jquery/dist/jquery.js"></script>
+  <script src="js/dojo/dojo-config.js"></script>
+  <script src="libs/dojo/dojo.js"></script>
+
+  <script>
+    /*
+        var domElement = document.getElementById("newsFlash"); //Browser API
+        console.dir(domElement);
+
+        var divElement = $("#newFlash"); //jQuery
+        console.dir(divElement[0]);
+
+        var domElement2 = document.querySelector("#newsFlash"); //Browser API
+        console.dir(domElement2);
+
+        require(["dojo/dom", "dojo/dom-construct", //Dojo
+          "dojo/domReady!"
+        ], function(dom, domConstruct) {
+          var divElement3 = dom.byId("newsFlash");
+          console.dir(divElement3);
+
+        });*/
+
+    /*
+        var domElement = document.getElementsByTagName("div"); //Browser API
+        console.dir(domElement[0]);
+
+        var divElement = $("div"); //jQuery
+        console.dir(divElement[0]);
+
+        var domElement2 = document.querySelector("div"); //Browser API
+        console.dir(domElement2[0]);
+
+        require(["dojo/dom", "dojo/dom-construct", "dojo/query", "dojo/domReady!"],
+        function(dom, domConstruct, query) { //Dojo
+          var divElement3 = query("#newsFlash");
+          console.dir(dom);
+          console.dir(query);
+          console.dir(divElement3[0]);
+
+        });*/
+
+    var domElement = document.getElementsByTagName("news-story"); //Browser API
+    console.dir(domElement[0]);
+
+    var divElement = $(".news-story"); //jQuery
+    console.dir(divElement[0]);
+
+    var domElement2 = document.querySelector(".news-story"); //Browser API
+    console.dir(domElement2[0]);
+
+    require(["dojo/dom", "dojo/dom-construct", "dojo/query", "dojo/domReady!"],
+      function(dom, domConstruct, query) { //Dojo
+        var divElement3 = query(".news-story");
+        console.dir(divElement3[0]);
+
+      });
+  </script>
+</body>
+
+</html>
