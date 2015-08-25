@@ -1,10 +1,9 @@
-require.config({
+requirejs.config({
 
 	paths: {
 		jquery: "../libs/jquery/dist/jquery"
 	},
-
-	shim: {
+	shim: { //can be used to specify other dependencies
 		jquery: {
 			exports: '$'
 		}
@@ -12,4 +11,4 @@ require.config({
 
 });
 
-requirejs(['app-amd/app']);
+requirejs(['app-amd/app']); //in require.js format we do not mention .js. Hence app here refers app.js file

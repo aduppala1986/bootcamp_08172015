@@ -130,6 +130,15 @@ module.exports = function(grunt) { //function object
       app = express(),
       webServerConfig = grunt.config("webServer");
 
+      app.use("/api/widgets", function(req, res) {
+        res.json([
+          { id: 1, name: "Widget 1"},
+          { id: 2, name: "Widget 2"},
+          { id: 3, name: "Widget 3"},
+          { id: 4, name: "Widget 4"}
+        ]);
+      });
+
     // not needed because we are using watch which is async
     //this.async();
 
