@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+
+<html>
+
+	<head>
+		<title>Intuit Bootcamp</title>
+		<link rel="shortcut icon" href="data:image/x-icon;," type="image/x-icon">
+		<script src="libs/jquery/dist/jquery.js"></script>
+		<script src="js/dojo/dojo-config.js"></script>
+		<script src="libs/dojo/dojo.js"></script>
+	</head>
+
+	<body>
+
+		<table>
+			<thead>
+				<tr>
+					<th>Make</th>
+					<th>Model</th>
+					<th>Year</th>
+					<th>Action</th>
+				</tr>
+			</thead>
+			<tbody>
+			</tbody>
+		</table>
+		<script>
+			function createViewCell(value) {
+				var td = document.createElement("td");
+				td.originalValue = value;
+				td.innerHTML = value;
+				return td;
+			}
+			function changeToEditCell(td) {
+				var input = document.createElement("input");
+				input.value = td.originalValue;
+				$(td).empty().append(input);
+				return td;
+			}
+			function changeToViewCell(td, cancel) {
+				if (!cancel) {
+					td.originalValue = $(td).find("input").val();
+				}
+				td.innerHTML = td.originalValue;
+				return td;
+			}
+			function createButton(label, handler) {
+				var button = document.createElement("button");
+				button.addEventListener("click", handler) 	;
+				button.innerHTML = label;
+				return button;
+			}
+			function getEditButtonHandler() {
+				return function(e) {
+					var tr = $(e.target).closest("tr");
+					tr.find("td:not(:last-of-type)").each(function(i, element) {
+						changeToEditCell(element);
+					});
+					showEditButtons(tr.find("td:last-of-type")[0]);
+				}
+			}
+			function getSaveButtonHandler() {
+				return function(e) {
+					var tr = $(e.target).closest("tr");
+					tr.find("td:not(:last-of-type)").each(function(i, element) {
+						changeToViewCell(element);
+					});
+					showViewButtons(tr.find("td:last-of-type")[0]);
+				}
+			}
+			function getCancelButtonHandler() {
+				return function(e) {
+					var tr = $(e.target).closest("tr");
+					tr.find("td:not(:last-of-type)").each(function(i, element) {
+						changeToViewCell(element, true);
+					});
+					showViewButtons(tr.find("td:last-of-type")[0]);
+				}
+			}
+			function showViewButtons(td) {
+				var editButton = createButton("Edit", getEditButtonHandler());
+				if (!td) {
+					td = document.createElement("td");
+				}
+				$(td).empty().append(editButton);
+				return td;
+			}
+			function showEditButtons(td) {
+				return $(td).empty()
+					.append(createButton("Save", getSaveButtonHandler()))
+					.append(createButton("Cancel", getCancelButtonHandler()))[0];
+			}
+			var cars = [
+				{ make: "Ford", model: "Fusion", year: 2015 },
+				{ make: "Chevrolet", model: "Spark", year: 2014 },
+				{ make: "Toyota", model: "Yaris", year: 2013 }
+			];
+			cars.forEach(function(car) {
+				var tr = document.createElement("tr");
+				tr.appendChild(createViewCell(car.make));
+				tr.appendChild(createViewCell(car.model));
+				tr.appendChild(createViewCell(car.year));
+				tr.appendChild(showViewButtons());
+				$("tbody").append(tr);
+			});
+		</script>
+
+	</body>
+</html>
