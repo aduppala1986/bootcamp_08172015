@@ -17,7 +17,8 @@
   },
   "homepage": "https://github.com/aduppala1986/bootcamp_08172015#readme",
   "dependencies": {
-    "express": "^4.13.3"
+    "express": "^4.13.3",
+    "multer": "^0.1.8"
   },
   "devDependencies": {
     "grunt": "^0.4.5",

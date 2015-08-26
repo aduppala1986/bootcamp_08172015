@@ -127,8 +127,24 @@ module.exports = function(grunt) { //function object
     var
       http = require("http"),
       express = require("express"), //express is middleware
+      multer = require("multer"),
       app = express(),
       webServerConfig = grunt.config("webServer");
+
+      //you can rename files here or do virus scan, etc
+      app.use("/api", multer({
+        dest: "./app/uploads",
+        rename: function(fieldName, fileName) {
+          return fileName;
+        }
+      }));
+
+      app.use("/api/uploads", function(req, res) {
+        res.json({
+          message: "Upload Successful!"
+        });
+        //res.send("<?xml version=\"1.0\"?>\n<message>Uploaded!</message>");
+      });
 
       app.use("/api/widgets", function(req, res) {
         res.json([

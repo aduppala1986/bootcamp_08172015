@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+
+<html>
+
+	<head>
+		<title>Intuit Bootcamp</title>
+		<link rel="shortcut icon" href="data:image/x-icon;," type="image/x-icon">
+	</head>
+
+	<body>
+
+		<form>
+			Select File: <input type="file" multiple id="uploadFile"> <button type="button">Upload</button>
+			<br><br>
+			<progress id="uploadProgress" value="0" max="0"></progress>
+		</form>
+
+		<script>
+			var uploadButton = document.getElementsByTagName("button")[0];
+			uploadButton.addEventListener("click", function(e) {
+				var fileInput = document.getElementById("uploadFile");
+				var fd = new FormData();
+				for (var x=0; x<fileInput.files.length; x++) {
+					fd.append("file-" + x, fileInput.files[x]);
+				}
+				var xhr = new XMLHttpRequest();
+				xhr.addEventListener("readystatechange", function() {
+					if (xhr.readyState === 4 && xhr.status !== 200) {
+						console.log("error occurred");
+						console.dir(xhr);
+					}
+					if (xhr.readyState === 4 && xhr.status === 200) {
+						console.log(JSON.parse(xhr.responseText));
+						//var parser = new DOMParser();
+						//console.log(parser.parseFromString(xhr.responseText, "application/xml"));
+					}
+				});
+				console.dir(xhr);
+				xhr.upload.addEventListener("progress", function(e) {
+					var uploadProgress = document.getElementById("uploadProgress");
+					uploadProgress.setAttribute("max", e.total);
+					uploadProgress.setAttribute("value", e.loaded);
+				});
+				xhr.open("POST", "/api/upload");
+				xhr.send(fd);
+			});
+		</script>
+
+	</body>
+</html>
