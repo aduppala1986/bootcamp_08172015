@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+	<title>File Upload Function</title>
+	<link rel="shortcut icon" href="data:image/x-icon;," type="image/x-icon">
+</head>
+
+<body>
+
+	Uploader 1:
+	<div class="myFileUpload"></div>
+	<br>
+	<br> Uploader 2:
+	<div class="myFileUpload"></div>
+
+	<script>
+		function myFileUploader(attachPoint) {
+			console.log("File Uploader Attached...");
+
+			//create form elements and attach it to the div
+			var domForm = document.createElement("form");
+
+			var domLabel = document.createElement("label");
+			domLabel.innerHTML = "Select File:";
+
+			var domMultiInput = document.createElement("input");
+			domMultiInput.setAttribute("type", "file");
+			domMultiInput.setAttribute("multiple", true);
+			domMultiInput.setAttribute("id", "uploadFile");
+
+			var domButton = document.createElement("button");
+			var domButtonText = document.createTextNode("Upload");
+			domButton.setAttribute("type", "button");
+			domButton.appendChild(domButtonText);
+
+			var domProgress = document.createElement("progress");
+			domProgress.setAttribute("id", "uploadProgress");
+			domProgress.setAttribute("value", "0");
+			domProgress.setAttribute("max", "0");
+
+			var domBreak = document.createElement("br");
+
+			domForm.appendChild(domLabel);
+			domForm.appendChild(domMultiInput);
+			domForm.appendChild(domButton);
+			domForm.appendChild(domBreak);
+			domForm.appendChild(domProgress);
+
+			attachPoint.appendChild(domForm);
+
+			//add event listener
+			domButton.addEventListener("click", function() {
+				var fd = new FormData();
+				for (var x = 0; x < domMultiInput.files.length; x++) {
+					fd.append("file-" + x, domMultiInput.files[x]);
+				}
+
+				var xhr = new XMLHttpRequest();
+				xhr.addEventListener("readystatechange", function() {
+					if (xhr.readyState === 4 && xhr.status !== 200) {
+						console.log("error occurred");
+						console.dir(xhr);
+					}
+					if (xhr.readyState === 4 && xhr.status === 200) {
+						console.log(JSON.parse(xhr.responseText));
+					}
+				});
+
+				console.dir(xhr);
+				xhr.upload.addEventListener("progress", function(e) {
+					domProgress.setAttribute("max", e.total);
+					domProgress.setAttribute("value", e.loaded);
+				});
+				xhr.open("POST", "/api/upload");
+				xhr.send(fd);
+			});
+
+		}
+
+		var fileUploadDivs = document.getElementsByClassName("myFileUpload");
+		console.dir(fileUploadDivs);
+		for (var x = 0; x < fileUploadDivs.length; x++) {
+			myFileUploader(fileUploadDivs[x]);
+		}
+	</script>
+
+</body>
+
+</html>

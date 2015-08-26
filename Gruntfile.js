@@ -139,7 +139,7 @@ module.exports = function(grunt) { //function object
         }
       }));
 
-      app.use("/api/uploads", function(req, res) {
+      app.use("/api/upload", function(req, res) {
         res.json({
           message: "Upload Successful!"
         });
