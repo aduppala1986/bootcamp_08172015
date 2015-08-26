@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+
+<html>
+
+	<head>
+		<title>Intuit Bootcamp</title>
+		<link rel="shortcut icon" href="data:image/x-icon;," type="image/x-icon">
+	</head>
+
+	<body>
+
+		<form>
+			Select File: <input type="file" multiple id="uploadFile"> <button type="button">Upload</button>
+		</form>
+
+		<script>
+			document.addEventListener("DOMContentLoaded", function() {
+				var ws = new WebSocket("ws://localhost:8080");
+				ws.addEventListener("message", function(result) {
+					console.log("upload successful!");
+					console.dir(result);
+				});
+				var uploadButton = document.getElementsByTagName("button")[0];
+				uploadButton.addEventListener("click", function(e) {
+						//ws.send("Test!");
+						//return;
+						uploadFile = document.getElementById("uploadFile");
+						for (var x=0; x<uploadFile.files.length; x++) {
+								var
+									file = uploadFile.files[x],
+									fileName = file.name,
+									fr = new FileReader();
+								fr.addEventListener("loadend", function() {
+									ws.send(JSON.stringify({ fileName: fileName }));
+									ws.send(fr.result);
+									/*
+									ws.send(JSON.stringify({
+										fileName: fileName,
+										fileData: fr.result
+									}));
+									*/
+								});
+								fr.readAsArrayBuffer(file);
+						}
+				});
+			});
+		</script>
+
+	</body>
+</html>

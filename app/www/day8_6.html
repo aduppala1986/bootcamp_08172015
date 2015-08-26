@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+
+<html>
+
+	<head>
+		<title>Intuit Bootcamp</title>
+		<link rel="shortcut icon" href="data:image/x-icon;," type="image/x-icon">
+		<script src="/socket.io/socket.io.js"></script>
+	</head>
+
+	<body>
+
+		<form>
+			Select File: <input type="file" multiple id="uploadFile"> <button type="button">Upload</button>
+		</form>
+
+		<script>
+			var socket = io();
+			socket.on("upload result", function(result) {
+				console.log("upload successful!");
+				console.dir(result);
+			});
+			var uploadButton = document.getElementsByTagName("button")[0];
+			uploadButton.addEventListener("click", function(e) {
+					uploadFile = document.getElementById("uploadFile");
+					for (var x=0; x<uploadFile.files.length; x++) {
+							var
+								file = uploadFile.files[x],
+								fileName = file.name,
+								fr = new FileReader();
+							fr.addEventListener("loadend", function() {
+								socket.emit("upload file", {
+									fileName: fileName,
+									fileData: fr.result
+								});
+							});
+							fr.readAsArrayBuffer(file);
+					}
+			});
+		</script>
+
+	</body>
+</html>

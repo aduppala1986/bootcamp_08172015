@@ -28,7 +28,6 @@
 			var domMultiInput = document.createElement("input");
 			domMultiInput.setAttribute("type", "file");
 			domMultiInput.setAttribute("multiple", true);
-			domMultiInput.setAttribute("id", "uploadFile");
 
 			var domButton = document.createElement("button");
 			var domButtonText = document.createTextNode("Upload");
@@ -36,7 +35,6 @@
 			domButton.appendChild(domButtonText);
 
 			var domProgress = document.createElement("progress");
-			domProgress.setAttribute("id", "uploadProgress");
 			domProgress.setAttribute("value", "0");
 			domProgress.setAttribute("max", "0");
 
