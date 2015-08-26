@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+	<title>Intuit Bootcamp</title>
+	<link rel="shortcut icon" href="data:image/x-icon;," type="image/x-icon">
+	<style>
+		#red-box {
+			float: left;
+			width: 50px;
+			height: 50px;
+			background-color: red;
+			box-sizing: border-box;
+		}
+
+		#blue-box {
+			float: right;
+			width: 200px;
+			height: 200px;
+			background-color: blue;
+			box-sizing: border-box;
+		}
+
+		.active {
+			border: 3px dashed yellow;
+		}
+	</style>
+</head>
+
+<body>
+
+	<div id="red-box" draggable="true"></div>
+	<div id="blue-box"></div>
+
+	<script>
+		var blueBox = document.getElementById("blue-box");
+
+		blueBox.addEventListener("dragenter", function (e) {
+			e.preventDefault();
+			blueBox.classList.add("active");
+		});
+
+		blueBox.addEventListener("dragleave", function (e) {
+			e.preventDefault();
+			blueBox.classList.remove("active");
+		});
+
+		document.addEventListener("dragstart", function(e) {
+			e.dataTransfer.setData("dragId", e.target.id);
+		});
+
+		document.addEventListener("dragover", function(e) {
+			e.preventDefault();
+		});
+
+		document.addEventListener("drop", function(e) {
+			e.preventDefault();
+			blueBox.classList.remove("active");
+			var dragElement = document.getElementById(e.dataTransfer.getData("dragId"));
+			var dropElement = e.target;
+			dropElement.appendChild(dragElement);
+		});
+	</script>
+
+</body>
+
+</html>

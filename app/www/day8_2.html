@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+
+<html dir="ltr">
+
+	<head>
+		<title>Intuit Boot Camp Demonstrations</title>
+		<style>
+			#red-box {
+				position:absolute;
+				top:100px;left:100px;
+				background-color:red;
+				width:100px;
+				height:100px;
+			}
+			#blue-box {
+				position:absolute;
+				top:100px;left:300px;
+				background-color:blue;
+				width:100px;
+				height:100px;
+			}
+		</style>
+	</head>
+
+	<body>
+
+		<div id="red-box"></div>
+
+		<div id="blue-box"></div>
+
+		<script>
+			var
+				touchedItems = {};
+			window.addEventListener("touchstart", function(e) {
+				e.preventDefault();
+				var touch = e.targetTouches[0];
+				if (touch.target instanceof HTMLDivElement) {
+					var element = document.getElementById(touch.target.id);
+					element.touchIdentifier = touch.identifier;
+					touchedItems[touch.identifier] = element;
+				}
+			});
+			window.addEventListener("touchend", function(e) {
+				e.preventDefault();
+				var touch = e.targetTouches[0];
+				if (e.target instanceof HTMLDivElement) {
+					delete touchedItems[e.target.touchIdentifier];
+				}
+			});
+			window.addEventListener("touchmove", function(e) {
+				e.preventDefault();
+				var x = e.touches.length;
+				while (x--) {
+					var touch = e.touches[x];
+					var element = touchedItems[touch.identifier];
+					element.style.top = (touch.clientY - (element.clientHeight / 2)) + "px";
+					element.style.left = (touch.clientX - (element.clientWidth / 2)) + "px";
+				}
+			});
+		</script>
+
+	</body>
+
+</html>
