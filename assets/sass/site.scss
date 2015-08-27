@@ -1,5 +1,5 @@
 //SCSS File for day3_4.html. Activate this by renaming this as site.scss
-.test {
+/*.test {
   margin: 10px;
   padding:5px;
   border: 1px solid red;
@@ -7,4 +7,13 @@
   color: white;
   width: 200px;
   box-sizing: border-box;
+}*/
+body {
+  div {
+    width: 50%;
+    margin: 10px;
+    padding: 10px;
+    border: 1px solid black;
+    display: inline;
+  }
 }
