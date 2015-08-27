@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+
+<html>
+
+	<head>
+		<title>Intuit Bootcamp</title>
+		<link rel="shortcut icon" href="data:image/x-icon;," type="image/x-icon">
+	</head>
+
+	<body>
+
+		<button>Click Me!</button>
+
+		<script>
+			var worker = new Worker("js/worker.js");
+			worker.addEventListener("error", function(error) {
+				console.dir(error);
+			});
+			worker.addEventListener("message", function(data) {
+			});
+			worker.postMessage({
+				eventName: "start",
+				eventData: "do something"
+			});
+			//worker.terminate();
+			//worker = undefined;
+			/*
+			var y=0;
+			for (var x=0; x<1000000000; x++) {
+				y = x;
+			}
+			*/
+		</script>
+
+	</body>
+</html>

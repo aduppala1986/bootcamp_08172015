@@ -145,7 +145,10 @@ module.exports = function(grunt) {
       app = express(),
       httpServer = http.createServer(app),
       multer = require("multer"),
-      io = require('socket.io')(httpServer),
+      WebSocketServer = require('ws').Server,
+      wss = new WebSocketServer({
+        server: httpServer
+      }),
       fs = require("fs"),
       zlib = require("zlib"),
       BufferStream = require("./buffer-stream"),
@@ -209,26 +212,40 @@ module.exports = function(grunt) {
 
     app.use(express.static(webServerConfig.rootFolder));
 
-    io.on('connection', function(socket) {
+    wss.on("connection", function(ws) {
 
-      console.log('a user connected');
-      socket.on('disconnect', function() {
-        console.log('user disconnected');
+      var filePath;
+
+      console.log("web sockets open");
+
+      ws.on("error", function(data) {
+        console.log("web sockets error");
       });
 
-      socket.on("upload file", function(fileInfo) {
+      ws.on("close", function(data) {
+        console.log("web sockets closed");
+      });
 
-        var
-          filePath = path.join(__dirname, "app", "uploads", fileInfo.fileName),
-          gzip = zlib.createGzip(),
-          bufferStream = new BufferStream(fileInfo.fileData),
-          output = fs.createWriteStream(filePath + ".gz");
+      ws.on("message", function(data) {
 
-        output.on("finish", function() {
-          socket.emit("upload result", "success");
-        });
+        if (!Buffer.isBuffer(data)) {
 
-        bufferStream.pipe(gzip).pipe(output);
+          filePath = path.join(__dirname, "app", "uploads", JSON.parse(data).fileName);
+
+        } else {
+
+          var
+            gzip = zlib.createGzip(),
+            bufferStream = new BufferStream(data),
+            output = fs.createWriteStream(filePath + ".gz");
+
+          output.on("finish", function() {
+            ws.send("upload result: success");
+          });
+
+          bufferStream.pipe(gzip).pipe(output);
+
+        }
 
       });
 
