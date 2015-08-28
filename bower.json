@@ -19,6 +19,7 @@
     "dojo": "~1.10.4",
     "jquery": "~2.1.4",
     "backbone": "~1.2.2",
+    "handlebars": "~3.0.3"
     "underscore": "~1.8.3"
   }
 }

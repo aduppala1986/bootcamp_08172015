@@ -27,10 +27,5 @@ build/Release
 node_modules
 
 app/www/libs
-.sass-cache/17af73e617ab564ae0e062c8ceaf08230f56ff32/intuit.scssc
-.sass-cache/57e7402ee70b6d213ad42b54a6f4e16e2cbda505/site.scssc
-.sass-cache/73a9593adaf159c2f8b6e6aa25eabc29e68bfecd/columns.scssc
-app/www/css/site.min.css
-app/www/css/site.min.gz.css
-app/www/js/site.min.gz.js
-app/www/js/site.min.js
+
+.sass-cache
