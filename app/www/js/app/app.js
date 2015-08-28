@@ -1,5 +1,5 @@
-define(["jquery","underscore","backbone"], function($, _, Backbone) {
+define(["jquery", "underscore", "backbone"], function($, _, Backbone) {
 
-	$("#message").html("Hello World!");
+  $("#message").html("Hello World!");
 
 });

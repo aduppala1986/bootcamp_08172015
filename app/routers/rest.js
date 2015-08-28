@@ -9,10 +9,10 @@ module.exports = function(fileName) {
     express = require("express"),
     router = express.Router();
 
-  router.route("/" + collectionName)
+  router.route("/" + collectionName) //3 tasks->registration, initial request, send back data
     .get(function(req, res) {
 
-      DataModel.find({}, function(err, results) {
+      DataModel.find({}, function(err, results) { //non-blocking i/o
         if (err) {
           console.log(err);
           res.status(500).json(err);
