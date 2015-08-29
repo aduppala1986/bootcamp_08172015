@@ -1,1 +1,1 @@
-<div>Welcome!</div>
+<div>Underscore Welcome<%= name %>!</div>

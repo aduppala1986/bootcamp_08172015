@@ -1,3 +1,3 @@
 <div>
-	Welcome!
+	Underscore Welcome <%= name %>!
 </div>

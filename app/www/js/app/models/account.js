@@ -7,7 +7,7 @@ define(["backbone"], function(Backbone) {
 			password: undefined,
 			firstName: undefined,
 			lastName: undefined
-		}
+		},
 
 		getName: function() {
 			return this.get["firstName"] + " " + this.get["lastName"];

@@ -6,7 +6,9 @@ this["underscore"]["assets/templates-min/home.min.tpl"] = function(obj) {
 obj || (obj = {});
 var __t, __p = '', __e = _.escape;
 with (obj) {
-__p += '<div>Welcome!</div>';
+__p += '<div>Underscore Welcome' +
+((__t = ( name )) == null ? '' : __t) +
+'!</div>';
 
 }
 return __p
