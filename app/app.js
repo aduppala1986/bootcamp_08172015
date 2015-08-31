@@ -15,6 +15,7 @@ module.exports = function(config) {
     fs = require("fs"),
     zlib = require("zlib"),
     BufferStream = require("./buffer-stream"),
+    util = require("util"),
     contentFolders = config.httpServer.contentFolders;
 
   // not needed because we are using watch which is async
@@ -26,31 +27,41 @@ module.exports = function(config) {
     config.mongoServer.dbName);
 
   // serialize account id to session
-  //passport.serializeUser(function(account, done) {
-  //	done(null, account._id);
-  //});
+  passport.serializeUser(function(account, done) {
+    logger.info("serialize user account id: " + account._id);
+    done(null, account._id);
+  });
 
-  // deserialize account from the database using is from session
-  //passport.deserializeUser(function(accountId, done) {
-  //	require("./models/account.js")
-  //		.findById(accountId, function(err, account) {
-  //			done(null, account.toObject());
-  //		});
-  //});
+  // deserialize account from the database using id from session
+  passport.deserializeUser(function(accountId, done) {
+    logger.info("deserialize user account id: " + accountId);
+    require("./models/account")
+      .findById(accountId, function(err, account) {
+
+        if (err) {
+          logger.error(util.inspect(err, 0));
+          res.status(500).json(err).end();
+        }
+
+        logger.info(util.inspect(account, 0));
+
+        done(null, account.toObject());
+      });
+  });
 
   // handle cookies
-  //app.use(cookieParser());
+  app.use(cookieParser());
 
   // sessions are used for password ONLY
-  //app.use(session({
-  //	resave: false,
-  //	saveUninitialized: false,
-  //	secret : "asecret"
-  //}));
+  app.use(session({
+    resave: false,
+    saveUninitialized: false,
+    secret: "asecret"
+  }));
 
   // setup passport for session based logins
-  //app.use(passport.initialize());
-  //app.use(passport.session());
+  app.use(passport.initialize());
+  app.use(passport.session());
 
   /*
   app.use("/css", function(req, res, next) {
@@ -91,7 +102,7 @@ module.exports = function(config) {
   app.use("/api", bodyParser.json());
 
   // authenticate all API requests
-  //app.use(require("./routers/authenticate"));
+  app.use(require("./routers/authenticate"));
 
   // validate logged in and tokens for all API requests
   //app.use(require("./routers/api-request-validator"));
@@ -127,6 +138,6 @@ module.exports = function(config) {
 
   http.createServer(app).listen(config.httpServer.port, function() {
     logger.info("web server running on port: " + config.httpServer.port);
-    logger.error("the world has ended...");
+    //logger.error("the world has ended...");
   });
 };
