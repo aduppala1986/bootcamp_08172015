@@ -2,13 +2,14 @@
 
 	var dependencies = [
 		"jquery", "underscore",
-		"backbone", "app/controllers/appController"
+		"backbone", "app/controllers/appController",
+		"app/models/account", "app/models/userFile",
+		"app/collections/userFiles"
 	];
 
-	function app($, _, Backbone, AppController) {
+	function app($, _, Backbone, AppController, Account, UserFile, UserFiles) {
 
-		var appController = new AppController();
-		appController.start();
+
 	}
 
 	define(dependencies, app);

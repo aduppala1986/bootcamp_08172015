@@ -45,6 +45,20 @@ module.exports = function(grunt) {
       port: 27017,
       dbName: "OnlineFileStorage"
     },
+    logger: {
+      transports: {
+        console: {
+          level: "debug",
+          colorize: true,
+          timeStamp: true
+        },
+        file: {
+          level: "debug",
+          fileName: "logs/app.log",
+          timeStamp: true
+        }
+      }
+    },
     sass: {
       main: {
         options: {
@@ -156,7 +170,8 @@ module.exports = function(grunt) {
 
     require("./app/app")({
       httpServer: grunt.config("httpServer"),
-      mongoServer: grunt.config("mongoServer")
+      mongoServer: grunt.config("mongoServer"),
+      logger: grunt.config("logger")
     });
 
   });
