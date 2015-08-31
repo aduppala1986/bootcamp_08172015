@@ -2,6 +2,9 @@ define(["backbone"], function(Backbone) {
 
 	return Backbone.Model.extend({
 
+		idAttribute: "_id",
+		urlRoot: "/api/accounts",
+
 		defaults: {
 			emailAddress: undefined,
 			password: undefined,
@@ -9,11 +12,12 @@ define(["backbone"], function(Backbone) {
 			lastName: undefined
 		},
 
+		// custom stuff
+
 		getName: function() {
-			return this.get["firstName"] + " " + this.get["lastName"];
+			return this.get("firstName") + " " + this.get("lastName");
 		}
 
 	})
-
 
 });
