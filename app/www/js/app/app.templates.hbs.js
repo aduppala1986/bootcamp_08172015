@@ -2,6 +2,22 @@ define(['handlebars'], function(Handlebars) {
 
 this["handlebars"] = this["handlebars"] || {};
 
+this["handlebars"]["appAccountFooter"] = Handlebars.template({"compiler":[6,">= 2.0.0-beta.1"],"main":function(depth0,helpers,partials,data) {
+    return "<small>&copy; 2015 Intuit, Inc. All Rights Reserved.</small>";
+},"useData":true});
+
+this["handlebars"]["appAccountHeader"] = Handlebars.template({"compiler":[6,">= 2.0.0-beta.1"],"main":function(depth0,helpers,partials,data) {
+    return "<h1>Accounts App</h1>";
+},"useData":true});
+
+this["handlebars"]["appAccountLayout"] = Handlebars.template({"compiler":[6,">= 2.0.0-beta.1"],"main":function(depth0,helpers,partials,data) {
+    return "<header id=\"page-header\"></header><nav id=\"menu\"></nav><main id=\"content\"></main><footer id=\"page-footer\"></footer>";
+},"useData":true});
+
+this["handlebars"]["appAccountMenu"] = Handlebars.template({"compiler":[6,">= 2.0.0-beta.1"],"main":function(depth0,helpers,partials,data) {
+    return "<div id=\"main-menu\"></div>";
+},"useData":true});
+
 this["handlebars"]["editAccount"] = Handlebars.template({"compiler":[6,">= 2.0.0-beta.1"],"main":function(depth0,helpers,partials,data) {
     var helper, alias1=helpers.helperMissing, alias2="function", alias3=this.escapeExpression;
 

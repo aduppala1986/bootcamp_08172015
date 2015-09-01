@@ -5,6 +5,7 @@ var dojoConfig = {
 		{ name: "jquery", location: "../jquery/dist", main: "jquery" },
 		{ name: "handlebars", location: "../handlebars", main: "handlebars" },
 		{ name: "underscore", location: "../underscore", main: "underscore" },
-		{ name: "backbone", location: "../backbone", main: "backbone" }
+		{ name: "backbone", location: "../backbone", main: "backbone" },
+		{ name: "marionette", location: "../backbone.marionette/lib", main: "backbone.marionette" }
 	]
 };
