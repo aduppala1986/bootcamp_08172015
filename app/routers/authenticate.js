@@ -33,7 +33,8 @@ router.route("/api/login").post(function(req, res) {
     return res.status(401).end();
   }
 
-  //saltedPassword = req.body.password.toString();
+  //if using salted password comment out this line
+  saltedPassword = req.body.password.toString();
 
   AccountModel.findOne({
     emailAddress: req.body.emailAddress,
