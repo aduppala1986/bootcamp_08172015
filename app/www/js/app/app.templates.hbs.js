@@ -2,6 +2,22 @@ define(['handlebars'], function(Handlebars) {
 
 this["handlebars"] = this["handlebars"] || {};
 
+this["handlebars"]["accountRow"] = Handlebars.template({"compiler":[6,">= 2.0.0-beta.1"],"main":function(depth0,helpers,partials,data) {
+    var helper, alias1=helpers.helperMissing, alias2="function", alias3=this.escapeExpression;
+
+  return "<td>"
+    + alias3(((helper = (helper = helpers.emailAddress || (depth0 != null ? depth0.emailAddress : depth0)) != null ? helper : alias1),(typeof helper === alias2 ? helper.call(depth0,{"name":"emailAddress","hash":{},"data":data}) : helper)))
+    + "</td><td>"
+    + alias3(((helper = (helper = helpers.firstName || (depth0 != null ? depth0.firstName : depth0)) != null ? helper : alias1),(typeof helper === alias2 ? helper.call(depth0,{"name":"firstName","hash":{},"data":data}) : helper)))
+    + "</td><td>"
+    + alias3(((helper = (helper = helpers.lastName || (depth0 != null ? depth0.lastName : depth0)) != null ? helper : alias1),(typeof helper === alias2 ? helper.call(depth0,{"name":"lastName","hash":{},"data":data}) : helper)))
+    + "</td><td><a href=\"#\" data-action-view-account>View</a> | <a href=\"#\" data-action-edit-account>Edit</a></td>";
+},"useData":true});
+
+this["handlebars"]["accountTable"] = Handlebars.template({"compiler":[6,">= 2.0.0-beta.1"],"main":function(depth0,helpers,partials,data) {
+    return "<table class=\"table table-striped\"><thead><tr><th>Email</th><th>First Name</th><th>Last Name</th><th>Action</th></tr></thead><tbody></tbody></table>";
+},"useData":true});
+
 this["handlebars"]["appAccountFooter"] = Handlebars.template({"compiler":[6,">= 2.0.0-beta.1"],"main":function(depth0,helpers,partials,data) {
     return "<small>&copy; 2015 Intuit, Inc. All Rights Reserved.</small>";
 },"useData":true});
@@ -48,6 +64,10 @@ this["handlebars"]["home"] = Handlebars.template({"compiler":[6,">= 2.0.0-beta.1
   return "<div>HBS Welcome "
     + ((stack1 = ((helper = (helper = helpers.name || (depth0 != null ? depth0.name : depth0)) != null ? helper : helpers.helperMissing),(typeof helper === "function" ? helper.call(depth0,{"name":"name","hash":{},"data":data}) : helper))) != null ? stack1 : "")
     + "! <button class=\"ok\">Ok!</button></div>";
+},"useData":true});
+
+this["handlebars"]["noAccountsRow"] = Handlebars.template({"compiler":[6,">= 2.0.0-beta.1"],"main":function(depth0,helpers,partials,data) {
+    return "<tr><td colspan=\"3\">No Accounts</td></tr>";
 },"useData":true});
 
 this["handlebars"]["summaryView"] = Handlebars.template({"compiler":[6,">= 2.0.0-beta.1"],"main":function(depth0,helpers,partials,data) {

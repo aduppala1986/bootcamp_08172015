@@ -9,6 +9,10 @@
 	function app($, _, Backbone, Marionette,
 		AppController, AccountRouter, templates) {
 
+		String.prototype.ucfirst = function() {
+    	return this.charAt(0).toUpperCase() + this.slice(1);
+		};
+
 		//var appController = new AppController(new AccountRouter());
 		//appController.start("55e48de10ea7f36020d38989");
 

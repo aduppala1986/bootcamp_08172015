@@ -7,11 +7,13 @@
 		<link rel="shortcut icon" href="data:image/x-icon;," type="image/x-icon">
 		<script src="/js/dojo/dojo-config.js"></script>
 		<script src="/libs/dojo/dojo.js"></script>
-		<link href="/libs/dijit/themes/claro/claro.css" rel="stylesheet">
+		<!-- <link href="/libs/dijit/themes/claro/claro.css" rel="stylesheet"> -->
+		<link rel="stylesheet" href="/libs/bootstrap/dist/css/bootstrap.min.css">
+		<link rel="stylesheet" href="/libs/bootstrap/dist/css/bootstrap-theme.min.css">
 	</head>
 
 	<body class="claro">
-		<main id="app"></main>
+		<div id="app" class="container-fluid"></div>
 		<script>
 			require(["app/app"]);
 		</script>

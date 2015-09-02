@@ -1,18 +1,14 @@
 (function() {
 
 	var dependencies = [
-		"jquery", "underscore",
-		"backbone", "marionette", "app/controllers/appController",
-		"app/routers/accountRouter", "app/app.templates.hbs"
+		"jquery", "underscore", "backbone", "marionette", "app/app.templates.hbs",
+		"app/models/account", "app/collections/accounts"
 	];
 
-	function app($, _, Backbone, Marionette,
-		AppController, AccountRouter, templates) {
+	function app($, _, Backbone, Marionette, Templates,
+		Account, Accounts) {
 
-		//var appController = new AppController(new AccountRouter());
-		//appController.start("55e48de10ea7f36020d38989");
 
-		//Backbone.history.start({pushState: true});
 
 	}
 

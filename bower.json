@@ -1,9 +1,9 @@
 {
   "name": "bootcamp_08172015",
   "version": "0.0.0",
-  "homepage": "https://github.com/aduppala1986/bootcamp_08172015",
+  "homepage": "https://github.com/training4developers/bootcamp_08172015",
   "authors": [
-    "Aradhana Duppala <aradhana.duppala@gmail.com>"
+    "Eric W. Greene <eric@training4developers.com>"
   ],
   "license": "MIT",
   "ignore": [
@@ -18,14 +18,13 @@
     "backbone": "~1.2.2",
     "backbone.marionette": "marionette#~2.4.2",
     "backbone.stickit": "~0.9.2",
+    "bootstrap": "~3.3.5",
     "dijit": "~1.10.4",
     "dojo": "~1.10.4",
     "handlebars": "~3.0.3",
     "jquery": "~2.1.4",
+    "q": "~1.0.1",
     "requirejs": "~2.1.20",
     "underscore": "~1.8.3"
-  },
-  "resolutions": {
-    "backbone": "~1.2.2"
   }
 }
