@@ -18,6 +18,18 @@ this["handlebars"]["accountTable"] = Handlebars.template({"compiler":[6,">= 2.0.
     return "<table class=\"table table-striped\"><thead><tr><th>Email</th><th>First Name</th><th>Last Name</th><th>Action</th></tr></thead><tbody></tbody></table>";
 },"useData":true});
 
+this["handlebars"]["appAccountContent"] = Handlebars.template({"compiler":[6,">= 2.0.0-beta.1"],"main":function(depth0,helpers,partials,data) {
+    var helper, alias1=helpers.helperMissing, alias2="function", alias3=this.escapeExpression;
+
+  return "<div>Email Address: "
+    + alias3(((helper = (helper = helpers.emailAddress || (depth0 != null ? depth0.emailAddress : depth0)) != null ? helper : alias1),(typeof helper === alias2 ? helper.call(depth0,{"name":"emailAddress","hash":{},"data":data}) : helper)))
+    + "</div><div>First Name: "
+    + alias3(((helper = (helper = helpers.firstName || (depth0 != null ? depth0.firstName : depth0)) != null ? helper : alias1),(typeof helper === alias2 ? helper.call(depth0,{"name":"firstName","hash":{},"data":data}) : helper)))
+    + "</div><div>Last Name: "
+    + alias3(((helper = (helper = helpers.lastName || (depth0 != null ? depth0.lastName : depth0)) != null ? helper : alias1),(typeof helper === alias2 ? helper.call(depth0,{"name":"lastName","hash":{},"data":data}) : helper)))
+    + "</div>";
+},"useData":true});
+
 this["handlebars"]["appAccountFooter"] = Handlebars.template({"compiler":[6,">= 2.0.0-beta.1"],"main":function(depth0,helpers,partials,data) {
     return "<small>&copy; 2015 Intuit, Inc. All Rights Reserved.</small>";
 },"useData":true});

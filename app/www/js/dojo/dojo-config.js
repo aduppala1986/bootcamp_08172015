@@ -3,6 +3,7 @@ var dojoConfig = {
 	packages: [
 		{ name: "app", location: "../../js/app" },
 		{ name: "jquery", location: "../jquery/dist", main: "jquery" },
+		{ name: "q", location: "../q", main: "q" },
 		{ name: "handlebars", location: "../handlebars", main: "handlebars" },
 		{ name: "underscore", location: "../underscore", main: "underscore" },
 		{ name: "backbone", location: "../backbone", main: "backbone" },
